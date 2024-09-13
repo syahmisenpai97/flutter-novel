@@ -37,8 +37,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(novelController.genres);
-
     Widget header() {
       return Container(
         margin: const EdgeInsets.symmetric(horizontal: 30),
@@ -143,6 +141,8 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: () {
           setState(() {
             _isSelected = index;
+            novelController.filterNovelsByGenre(novelController.genres[index]);
+            // print("Selected genre: ${novelController.genres[index]}");
           });
         },
         child: Container(
@@ -178,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     Widget listNovel() {
       return Obx(() {
-        if (novelController.novelCollection.isEmpty) {
+        if (novelController.filteredData.isEmpty) {
           return const CircularProgressIndicator();
         } else {
           return Padding(
@@ -187,12 +187,12 @@ class _HomeScreenState extends State<HomeScreen> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: novelController.novelCollection
+                children: novelController.filteredData
                     .asMap()
                     .entries
                     .map(
                       (MapEntry map) => NovelCollection(
-                        info: novelController.novelCollection[map.key],
+                        info: novelController.filteredData[map.key],
                       ),
                     )
                     .toList(),
