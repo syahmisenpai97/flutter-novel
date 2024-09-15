@@ -11,6 +11,7 @@ import 'package:kacs/views/pages/HomeScreen/view/widget_search_novel.dart';
 import 'package:kacs/views/pages/NovelDetailScreen/controller/novel_details_controller.dart';
 
 import 'package:kacs/views/themes/theme_config.dart';
+import 'package:kacs/views/widgets/loading/wave_spinner.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -253,7 +254,9 @@ class _HomeScreenState extends State<HomeScreen> {
     Widget listCategories() {
       return Obx(() {
         if (novelController.genres.isEmpty) {
-          return const CircularProgressIndicator();
+          return QLoadingSpinWave(
+            color: successColor,
+          );
         } else {
           return SingleChildScrollView(
             padding: EdgeInsets.only(left: 15.w),
@@ -269,7 +272,9 @@ class _HomeScreenState extends State<HomeScreen> {
     Widget listNovel() {
       return Obx(() {
         if (novelController.filteredData.isEmpty) {
-          return const CircularProgressIndicator();
+          return QLoadingSpinWave(
+            color: successColor,
+          );
         } else {
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),

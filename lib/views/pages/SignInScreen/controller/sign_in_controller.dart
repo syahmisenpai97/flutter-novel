@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kacs/constants/enum.dart';
 import 'package:kacs/services/api_services.dart';
+import 'package:kacs/utils/utils.dart';
 
 class SignInController extends GetxController {
   final _api = ApiService();
@@ -26,14 +27,10 @@ class SignInController extends GetxController {
 
       if (response != null) {
         // Get.toNamed("/otp")!.then((value) {
-
+        Utils.showToast(response.otp, sec: 5);
         // });
-        Get.toNamed('/otp', arguments: {"userDetails": response});
-
-        // Utils.showToast("Login successfully");
-      } else {
-        // Utils.showToast("Error");
-      }
+        Get.offAndToNamed('/otp', arguments: {"userDetails": response});
+      } else {}
     });
   }
 }

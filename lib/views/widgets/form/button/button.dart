@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:kacs/views/themes/theme_config.dart';
 
-
 class QButton extends StatefulWidget {
   const QButton({
     required this.label,
@@ -17,6 +16,7 @@ class QButton extends StatefulWidget {
     // this.size = ThemeSize.md,
     this.fontSize,
     this.enabled = true,
+    this.style,
   });
   final String label;
   final Function onPressed;
@@ -29,6 +29,7 @@ class QButton extends StatefulWidget {
   // final ThemeSize size;
   final double? fontSize;
   final bool enabled;
+  final TextStyle? style;
 
   @override
   State<QButton> createState() => _QButtonState();
@@ -84,10 +85,11 @@ class _QButtonState extends State<QButton> {
                   widget.label,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: widget.fontSize ?? widgetFontSize,
-                    color: Colors.white,
-                  ),
+                  style: widget.style ??
+                      TextStyle(
+                        fontSize: widget.fontSize ?? widgetFontSize,
+                        color: Colors.white,
+                      ),
                 ),
               ),
             if (widget.icon != null)

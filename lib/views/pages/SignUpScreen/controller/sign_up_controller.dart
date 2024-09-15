@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kacs/constants/enum.dart';
 import 'package:kacs/services/api_services.dart';
+import 'package:kacs/utils/utils.dart';
 
 class SignUpController extends GetxController {
   final _api = ApiService();
@@ -44,6 +45,7 @@ class SignUpController extends GetxController {
       setRxRequestStatus(Status.COMPLETED);
 
       if (response != null) {
+        Utils.showToast(response.otp, sec: 5);
         Get.toNamed('/otp', arguments: {"userDetails": response});
       }
     });

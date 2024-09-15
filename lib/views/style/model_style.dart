@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ModelStyle {
   static InputBorder get defaultBorderTextField {
@@ -29,5 +30,12 @@ class ModelStyle {
     );
   }
 
- 
+  static TextStyle get defaultTextButtonStyle {
+    return GoogleFonts.montserrat(
+      textStyle: TextStyle(
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      ),
+    );
+  }
 }

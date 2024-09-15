@@ -21,6 +21,7 @@ Color dangerColor = const Color(0xffdc3545);
 
 Color inputColor = Colors.grey[300]!;
 double inputHeight = 52;
+Color topBackgroundColor = const Color.fromRGBO(112, 128, 144, 1);
 Color focusedBorderColor = const Color.fromRGBO(23, 171, 144, 1);
 Color fillColor = const Color.fromRGBO(243, 246, 249, 0);
 Color borderColor = const Color.fromRGBO(23, 171, 144, 0.4);

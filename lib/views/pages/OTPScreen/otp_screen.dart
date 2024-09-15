@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kacs/models/view_model_user.dart';
 import 'package:kacs/utils/utils.dart';
+import 'package:kacs/views/pages/SignInScreen/controller/sign_in_controller.dart';
 
 import 'package:pinput/pinput.dart';
 
@@ -43,12 +44,19 @@ class _OTPScreenState extends State<OTPScreen> {
                     color: const Color.fromRGBO(62, 116, 165, 1),
                   ),
                 ),
-                Text(
-                  'Resend',
-                  style: GoogleFonts.poppins(
-                    fontSize: 16,
-                    decoration: TextDecoration.underline,
-                    color: const Color.fromRGBO(62, 116, 165, 1),
+                InkWell(
+                  onTap: () async {
+                    final signInController = Get.put(SignInController());
+                    signInController.emailController.value.text = userDetails.user.email;
+                    await signInController.loginApi();
+                  },
+                  child: Text(
+                    'Resend',
+                    style: GoogleFonts.poppins(
+                      fontSize: 16,
+                      decoration: TextDecoration.underline,
+                      color: const Color.fromRGBO(62, 116, 165, 1),
+                    ),
                   ),
                 ),
               ],
@@ -126,11 +134,11 @@ class _OTPPinState extends State<OTPPin> {
     formKey = GlobalKey<FormState>();
     pinController = TextEditingController();
     focusNode = FocusNode();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
-        Utils.showToast(widget.otp, sec: 5);
-      }
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   if (mounted) {
+    //     Utils.showToast(widget.otp, sec: 5);
+    //   }
+    // });
   }
 
   @override

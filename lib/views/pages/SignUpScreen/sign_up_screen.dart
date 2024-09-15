@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kacs/utils/validator/validator.dart';
 import 'package:kacs/views/pages/SignUpScreen/controller/sign_up_controller.dart';
+import 'package:kacs/views/style/model_style.dart';
+import 'package:kacs/views/widgets/form/button/back_button.dart';
 import 'package:kacs/views/widgets/form/button/button.dart';
 import 'package:kacs/views/widgets/form/dropdown/dropdown_field.dart';
 import 'package:kacs/views/widgets/form/phonenumber/phone_number.dart';
@@ -26,32 +30,42 @@ class _SignUpScreenState extends State<SignUpScreen> {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              const Row(
+              Row(
                 children: [
+                  Expanded(child: BackButtonWidget()),
                   Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Register",
-                          style: TextStyle(
-                            fontSize: 26.0,
-                            fontWeight: FontWeight.bold,
+                    flex: 5,
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Register",
+                            style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                fontSize: 26.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 4.0,
-                        ),
-                        Text(
-                          "Write less do more",
-                          style: TextStyle(
-                            fontSize: 16.0,
+                          Text(
+                            "Create Your Account to Get Started",
+                            style: GoogleFonts.lekton(
+                              textStyle: TextStyle(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
-                        ),
-                      ],
+                          const SizedBox(
+                            height: 20,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
+                  Expanded(child: Container())
                 ],
               ),
               Expanded(
@@ -157,6 +171,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         QButton(
                           label: "Register",
+                          style: ModelStyle.defaultTextButtonStyle,
                           onPressed: () {
                             if (_signUpForm.currentState!.validate()) {
                               if (signUpController.passwordController.value.text == signUpController.confirmPasswdController.value.text) {

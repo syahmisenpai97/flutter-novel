@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kacs/constants/image_asset.dart';
 import 'package:kacs/models/view_model_user.dart';
 import 'package:kacs/views/pages/HomeScreen/home_screen.dart';
+import 'package:kacs/views/style/model_style.dart';
+import 'package:kacs/views/themes/theme_config.dart';
+import 'package:kacs/views/widgets/apperances/backgroundPainter.dart';
 import 'package:kacs/views/widgets/apperances/bezierContainer.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -31,78 +35,123 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
+  Widget _title() {
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+        text: 'My',
+        style: GoogleFonts.majorMonoDisplay(
+          textStyle: TextStyle(
+            fontSize: 40.sp,
+            fontWeight: FontWeight.w700,
+            color: Colors.black,
+          ),
+        ),
+        children: [
+          TextSpan(
+            text: 'No',
+            style: TextStyle(color: Colors.white, fontSize: 40.sp),
+          ),
+          TextSpan(
+            text: 'vel',
+            style: TextStyle(color: Colors.white, fontSize: 40.sp),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _subtitle() {
+    return Text(
+      'Read your favorite stories',
+      textAlign: TextAlign.center,
+      style: GoogleFonts.montserrat(
+        textStyle: const TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w400,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          Positioned(top: -MediaQuery.of(context).size.height * .15, right: -MediaQuery.of(context).size.width * .4, child: BezierContainer()),
+          Positioned.fill(
+            child: CustomPaint(
+              painter: BackgroundPainter(),
+            ),
+          ),
           Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              const Image(image: AssetImage(ImageAsset.avatarFemale)),
-              const Column(
-                children: [Text('data'), Text('data')],
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Spacer(),
+              _title(),
+              SizedBox(height: 60.h),
+              Image.asset(
+                ImageAsset.book,
+                height: 200.h,
+                width: 200.w,
+                fit: BoxFit.cover,
               ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 10.w,
-                  ),
-                  Expanded(
-                    child: MaterialButton(
-                      padding: EdgeInsets.symmetric(vertical: 8.h),
-                      color: const Color(0xFF1E232C),
-                      shape: const RoundedRectangleBorder(
-                          // borderRadius: BorderRadius.circular(8),
-                          ),
-                      onPressed: () {
-                        Get.toNamed('/signIn');
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.all(15.0),
-                        child: Text(
-                          "Login",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: _subtitle(),
                     ),
-                  ),
-                  SizedBox(
-                    width: 10.w,
-                  ),
-                  Expanded(
-                    child: MaterialButton(
-                      padding: EdgeInsets.symmetric(vertical: 8.h),
-                      shape: const RoundedRectangleBorder(
-                        side: BorderSide(
-                          color: Color(0xFF1E232C),
-                        ),
-                        // borderRadius: BorderRadius.circular(8),
-                      ),
-                      onPressed: () {
-                        Get.toNamed('/signUp');
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.all(15.0),
-                        child: Text(
-                          "Register",
-                          style: TextStyle(
-                            color: Color(0xFF1E232C),
-                            fontSize: 16,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: MaterialButton(
+                            padding: EdgeInsets.symmetric(vertical: 15),
+                            color: const Color(0xFF1E232C),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            onPressed: () {
+                              Get.toNamed('/signIn');
+                            },
+                            child: Text(
+                              "Login",
+                              style: ModelStyle.defaultTextButtonStyle,
+                            ),
                           ),
                         ),
-                      ),
+                        SizedBox(width: 20),
+                        Expanded(
+                          child: MaterialButton(
+                            padding: EdgeInsets.symmetric(vertical: 15),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              side: const BorderSide(
+                                color: Color(0xFF1E232C),
+                              ),
+                            ),
+                            onPressed: () {
+                              Get.toNamed('/signUp');
+                            },
+                            child: Text(
+                              "Register",
+                              style: ModelStyle.defaultTextButtonStyle.copyWith(
+                                color: Color(0xFF1E232C),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  SizedBox(
-                    width: 10.w,
-                  ),
-                ],
-              )
+                  ],
+                ),
+              ),
+              SizedBox(height: 40),
             ],
           ),
         ],
