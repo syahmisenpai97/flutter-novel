@@ -3,6 +3,10 @@
 
 A simple Flutter app to browse novels, search for titles, and view categories. This project is tested on Xiaomi 12T Pro with Android 12.
 
+## Download
+
+<a href= "https://github.com/syahmisenpai97/flutter-novel/releases/tag/android">Download APK release <br/>
+
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
