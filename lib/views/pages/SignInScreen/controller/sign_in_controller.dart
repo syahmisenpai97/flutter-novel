@@ -22,12 +22,12 @@ class SignInController extends GetxController {
     setRxRequestStatus(Status.LOADING);
     Map data = {"identifier": emailController.value.text};
     // Map data = {"email": emailController.value.text, "password": passwordController.value.text};
-    await _api.loginApi(data).then((response) {
+    await _api.loginApi(data).then((response) async {
       setRxRequestStatus(Status.COMPLETED);
 
       if (response != null) {
         // Get.toNamed("/otp")!.then((value) {
-        Utils.showToast(response.otp, sec: 5);
+        await Utils.showToast(response.otp, sec: 5);
         // });
         Get.offAndToNamed('/otp', arguments: {"userDetails": response});
       } else {}

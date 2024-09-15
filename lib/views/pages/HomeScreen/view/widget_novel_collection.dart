@@ -16,7 +16,8 @@ class NovelCollection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         InkWell(
           onTap: () async {
@@ -42,7 +43,6 @@ class NovelCollection extends StatelessWidget {
             child: Container(
               height: 160,
               width: 110,
-              margin: const EdgeInsets.only(top: 12, right: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
@@ -54,16 +54,17 @@ class NovelCollection extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         SizedBox(
-          width: 110,
+          // width: 110,
           child: Text(
             info.author,
             style: mediumText12.copyWith(color: greyColor),
           ),
         ),
         SizedBox(
-          width: 110,
+          // width: 110,
           child: Text(
             info.title,
+            textAlign: TextAlign.center,
             style: semiBoldText14.copyWith(color: blackColor),
           ),
         ),

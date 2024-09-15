@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class QLoadingSpinWave extends StatefulWidget {
   const QLoadingSpinWave({
     super.key,
-    required this.color,
+    this.color = const Color(0xff28a745),
     this.trackColor = const Color(0x68757575),
     this.waveColor = const Color(0x68757575),
     this.size = 50,

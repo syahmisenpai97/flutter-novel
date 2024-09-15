@@ -10,7 +10,7 @@ class Utils {
     FocusScope.of(context).requestFocus(nextFocus);
   }
 
-  static void showToast(String message, {bool isError = false, int sec = 3}) {
+  static Future<void> showToast(String message, {bool isError = false, int sec = 3}) async {
     FToast fToast = FToast();
     fToast.init(navigatorKey.currentContext!);
 
@@ -20,6 +20,7 @@ class Utils {
     );
 
     FocusManager.instance.primaryFocus?.unfocus();
+    await Future.delayed(const Duration(seconds: 1));
 
     fToast.showToast(
       child: toast,

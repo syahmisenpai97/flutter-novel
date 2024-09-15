@@ -21,7 +21,7 @@ class ApiService {
       }
     } catch (e, stacktrace) {
       print(stacktrace);
-      handleApiException(e);
+      await handleApiException(e);
     }
     return null;
   }
@@ -36,7 +36,7 @@ class ApiService {
       }
     } catch (e, stacktrace) {
       print(stacktrace);
-      handleApiException(e);
+      await handleApiException(e);
     }
     return null;
   }
@@ -51,7 +51,7 @@ class ApiService {
       }
     } catch (e, stacktrace) {
       print(stacktrace);
-      handleApiException(e);
+      await handleApiException(e);
     }
     return null;
   }
@@ -66,7 +66,7 @@ class ApiService {
       }
     } catch (e, stacktrace) {
       print(stacktrace);
-      handleApiException(e);
+      await handleApiException(e);
     }
     return null;
   }
@@ -81,7 +81,7 @@ class ApiService {
       }
     } catch (e, stacktrace) {
       print(stacktrace);
-      handleApiException(e);
+      await handleApiException(e);
     }
     return null;
   }

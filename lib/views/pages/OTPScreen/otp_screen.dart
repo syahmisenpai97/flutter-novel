@@ -172,12 +172,14 @@ class _OTPPinState extends State<OTPPin> {
         validator: (value) {
           return value == widget.otp ? 'Pin is correct' : 'Pin is incorrect';
         },
-        onCompleted: (pin) {
+        onCompleted: (pin) async {
           debugPrint('onCompleted: $pin');
           if (pin == widget.otp) {
             getBox.write('userData', widget.user.toJson());
+            // FocusManager.instance.primaryFocus?.unfocus();
+            // await Future.delayed(const Duration(seconds: 1));
             Get.offAllNamed('/home');
-            Utils.showToast('Login successful');
+            await Utils.showToast('Login successful');
           }
         },
         onChanged: (value) {

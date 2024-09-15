@@ -30,7 +30,7 @@ class SignUpController extends GetxController {
 
   void setRxRequestStatus(Status value) => rxRequestStatus.value = value;
 
-  void registerApi() {
+  Future<void> registerApi() async {
     setRxRequestStatus(Status.LOADING);
     Map data = {
       "email": emailController.value.text,
@@ -41,11 +41,11 @@ class SignUpController extends GetxController {
       "phoneNumber": countryCode.value + phoneNoController.value.text,
       // "password": passwordController.value.text,
     };
-    _api.registerApi(data).then((response) {
+    await _api.registerApi(data).then((response) async {
       setRxRequestStatus(Status.COMPLETED);
 
       if (response != null) {
-        Utils.showToast(response.otp, sec: 5);
+        await Utils.showToast(response.otp, sec: 5);
         Get.toNamed('/otp', arguments: {"userDetails": response});
       }
     });

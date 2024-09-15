@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:kacs/views/pages/HomeScreen/home_screen.dart';
 import 'package:kacs/views/pages/NovelDetailScreen/novel_details_screen.dart';
 import 'package:kacs/views/pages/OTPScreen/otp_screen.dart';
@@ -38,4 +39,9 @@ class Routes {
     //   page: () => const ReadScreen(),
     // ),
   ];
+
+  static String determineInitialRoute() {
+    final box = GetStorage();
+    return box.read('userData') != null ? '/home' : '/splash';
+  }
 }

@@ -32,7 +32,7 @@ class ModelStyle {
 
   static TextStyle get defaultTextButtonStyle {
     return GoogleFonts.montserrat(
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
         fontWeight: FontWeight.bold,
         color: Colors.white,
       ),

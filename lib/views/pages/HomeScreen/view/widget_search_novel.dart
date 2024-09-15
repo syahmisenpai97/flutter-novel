@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kacs/views/themes/theme_config.dart';
+import 'package:kacs/views/widgets/loading/wave_spinner.dart';
 
 class SearchNovel extends StatelessWidget {
   const SearchNovel({
@@ -37,7 +38,7 @@ class SearchNovel extends StatelessWidget {
               return child;
             } else {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: QLoadingSpinWave(),
               );
             }
           },

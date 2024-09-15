@@ -28,6 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int _isSelected = 0;
 
+  Future<void> _onRefresh() async {
+    await novelController.fetchApi();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -233,7 +237,6 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() {
             _isSelected = index;
             novelController.filterNovelsByGenre(novelController.genres[index]);
-            // print("Selected genre: ${novelController.genres[index]}");
           });
         },
         child: Container(
@@ -254,9 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Widget listCategories() {
       return Obx(() {
         if (novelController.genres.isEmpty) {
-          return QLoadingSpinWave(
-            color: successColor,
-          );
+          return const QLoadingSpinWave();
         } else {
           return SingleChildScrollView(
             padding: EdgeInsets.only(left: 15.w),
@@ -272,26 +273,25 @@ class _HomeScreenState extends State<HomeScreen> {
     Widget listNovel() {
       return Obx(() {
         if (novelController.filteredData.isEmpty) {
-          return QLoadingSpinWave(
-            color: successColor,
-          );
+          return const QLoadingSpinWave();
         } else {
           return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: novelController.filteredData
-                    .asMap()
-                    .entries
-                    .map(
-                      (MapEntry map) => NovelCollection(
-                        info: novelController.filteredData[map.key],
-                      ),
-                    )
-                    .toList(),
+            padding: EdgeInsets.symmetric(vertical: 20.h),
+            child: GridView.builder(
+              shrinkWrap: true,
+              physics: const BouncingScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10.w,
+                crossAxisSpacing: 10.w,
+                childAspectRatio: 0.75,
               ),
+              itemCount: novelController.filteredData.length,
+              itemBuilder: (BuildContext context, int index) {
+                return NovelCollection(
+                  info: novelController.filteredData[index],
+                );
+              },
             ),
           );
         }
@@ -300,42 +300,48 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       backgroundColor: backgroundColor,
-      body: ListView(
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 30),
-            decoration: BoxDecoration(
-              color: whiteColor,
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(30),
-                bottomRight: Radius.circular(30),
+      body: RefreshIndicator(
+        color: Colors.white,
+        backgroundColor: successColor,
+        strokeWidth: 3,
+        onRefresh: _onRefresh,
+        child: ListView(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 30),
+              decoration: BoxDecoration(
+                color: whiteColor,
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(30),
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  header(),
+                  const SizedBox(height: 30),
+                  searchField(),
+                  const SizedBox(height: 10),
+                  searchNovel(),
+                ],
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                header(),
-                const SizedBox(height: 30),
-                searchField(),
-                const SizedBox(height: 10),
-                searchNovel(),
-              ],
+            const SizedBox(
+              height: 20,
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          listCategories(),
-          Padding(
-            padding: EdgeInsets.only(left: 15.w, top: 30),
-            child: Text(
-              'Trending Now',
-              style: semiBoldText16.copyWith(color: blackColor),
+            listCategories(),
+            Padding(
+              padding: EdgeInsets.only(left: 15.w, top: 30),
+              child: Text(
+                'Trending Now',
+                style: semiBoldText16.copyWith(color: blackColor),
+              ),
             ),
-          ),
-          listNovel(),
-          const SizedBox(height: 30),
-        ],
+            listNovel(),
+            const SizedBox(height: 30),
+          ],
+        ),
       ),
     );
   }

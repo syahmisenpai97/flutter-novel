@@ -4,13 +4,12 @@ import 'package:get/get.dart';
 class BackButtonWidget extends StatelessWidget {
   final VoidCallback? onPressed;
 
-  const BackButtonWidget({Key? key, this.onPressed}) : super(key: key);
+  const BackButtonWidget({super.key, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
       icon: Container(
-        padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           color: Colors.transparent,
           shape: BoxShape.circle,

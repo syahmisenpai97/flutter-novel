@@ -5,11 +5,11 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kacs/constants/image_asset.dart';
 import 'package:kacs/models/view_model_user.dart';
-import 'package:kacs/views/pages/HomeScreen/home_screen.dart';
+
 import 'package:kacs/views/style/model_style.dart';
-import 'package:kacs/views/themes/theme_config.dart';
+
 import 'package:kacs/views/widgets/apperances/backgroundPainter.dart';
-import 'package:kacs/views/widgets/apperances/bezierContainer.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -88,7 +88,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Spacer(),
+              const Spacer(),
               _title(),
               SizedBox(height: 60.h),
               Image.asset(
@@ -97,7 +97,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 width: 200.w,
                 fit: BoxFit.cover,
               ),
-              Spacer(),
+              const Spacer(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Column(
@@ -111,7 +111,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       children: [
                         Expanded(
                           child: MaterialButton(
-                            padding: EdgeInsets.symmetric(vertical: 15),
+                            padding: const EdgeInsets.symmetric(vertical: 15),
                             color: const Color(0xFF1E232C),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -125,10 +125,10 @@ class _SplashScreenState extends State<SplashScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 20),
+                        const SizedBox(width: 20),
                         Expanded(
                           child: MaterialButton(
-                            padding: EdgeInsets.symmetric(vertical: 15),
+                            padding: const EdgeInsets.symmetric(vertical: 15),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                               side: const BorderSide(
@@ -141,7 +141,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             child: Text(
                               "Register",
                               style: ModelStyle.defaultTextButtonStyle.copyWith(
-                                color: Color(0xFF1E232C),
+                                color: const Color(0xFF1E232C),
                               ),
                             ),
                           ),
@@ -151,7 +151,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
             ],
           ),
         ],
