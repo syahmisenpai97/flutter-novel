@@ -51,12 +51,6 @@ For iOS:
 flutter build ios
 ```
 
-## Features
-
-- **Novel Search**: Type at least 3 characters in the search bar to begin searching for novels.
-- **Category Navigation**: Swipe left to view different novel categories.
-- **Pull to Refresh**: You can pull down to refresh the novel list.
-
 ## Testing Environment
 
 - Tested on **Xiaomi 12T Pro** running Android 12.
