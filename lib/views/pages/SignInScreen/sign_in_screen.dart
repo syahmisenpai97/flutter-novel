@@ -7,7 +7,6 @@ import 'package:kacs/views/pages/SignInScreen/controller/sign_in_controller.dart
 import 'package:kacs/views/themes/theme_config.dart';
 import 'package:kacs/views/widgets/form/button/button.dart';
 import 'package:kacs/views/widgets/form/textfield/text_field.dart';
-import 'package:kacs/views/widgets/toast.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -35,9 +34,9 @@ class _SignInScreenState extends State<SignInScreen> {
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 children: [
-                  Row(
+                  const Row(
                     children: [
-                      const Expanded(
+                      Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -60,12 +59,6 @@ class _SignInScreenState extends State<SignInScreen> {
                           ],
                         ),
                       ),
-                      // Image.asset(
-                      //   "assets/icon/icon.png",
-                      //   width: 64.0,
-                      //   height: 64.0,
-                      //   fit: BoxFit.fill,
-                      // ),
                     ],
                   ),
                   const Spacer(),
@@ -82,6 +75,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             controller: signInController.emailController.value,
                             focusNode: signInController.emailFocusNode.value,
                             textInputAction: TextInputAction.next,
+                            prefixIcon: Icons.person,
                             onChanged: (value) {},
                           ),
                           QTextField(
@@ -91,14 +85,15 @@ class _SignInScreenState extends State<SignInScreen> {
                             controller: signInController.passwordController.value,
                             focusNode: signInController.passwordFocusNode.value,
                             textInputAction: TextInputAction.next,
+                            prefixIcon: Icons.lock,
                             suffixIcon: Icons.password,
                             onChanged: (value) {},
                           ),
                           QButton(
                             label: "Login",
-                            onPressed: () {
+                            onPressed: () async {
                               if (_signInForm.currentState!.validate()) {
-                                signInController.loginApi();
+                                await signInController.loginApi();
                               }
                             },
                           ),

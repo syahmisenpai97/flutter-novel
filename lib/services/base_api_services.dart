@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:kacs/constants/enum.dart';
-import 'package:kacs/controllers/auth/http/service_url.dart';
+import 'package:kacs/constants/http/service_url.dart';
 
 abstract class BaseApiService {
   Future<ApiResponse<dynamic>> getApi(String url);

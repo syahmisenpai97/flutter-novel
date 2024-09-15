@@ -1,14 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:kacs/constants/enum.dart';
-import 'package:kacs/controllers/auth/http/service_url.dart';
-import 'package:kacs/models/view_model_novel.dart';
 import 'package:kacs/views/pages/HomeScreen/model/view_model_novel_list.dart';
 import 'package:kacs/services/api_services.dart';
-import 'package:kacs/utils/utils.dart';
 import 'package:kacs/views/pages/NovelDetailScreen/model/view_model_novel_details.dart';
-import 'package:html/parser.dart';
 
 class NovelDetailsController extends GetxController {
   final _api = ApiService();
@@ -18,7 +13,7 @@ class NovelDetailsController extends GetxController {
   final rxRequestStatus = Status.COMPLETED.obs;
   RxString error = ''.obs;
 
-  void setRxRequestStatus(Status _value) => rxRequestStatus.value = _value;
+  void setRxRequestStatus(Status value) => rxRequestStatus.value = value;
   RxList<ViewModelNovelCollection> novelCollection = <ViewModelNovelCollection>[].obs;
 
   Future<ViewModelNovelDetails?> novelIDApi(int id) async {
@@ -38,6 +33,7 @@ class NovelDetailsController extends GetxController {
       error.value = e.toString();
       setRxRequestStatus(Status.ERROR);
     }
+    return null;
   }
 
   void updateNovelDetailsData(ViewModelNovelDetails? data) {

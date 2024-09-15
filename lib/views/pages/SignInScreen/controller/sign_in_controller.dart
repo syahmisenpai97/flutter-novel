@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kacs/constants/enum.dart';
 import 'package:kacs/services/api_services.dart';
-import 'package:kacs/utils/utils.dart';
 
 class SignInController extends GetxController {
   final _api = ApiService();
@@ -16,13 +15,13 @@ class SignInController extends GetxController {
   final rxRequestStatus = Status.COMPLETED.obs;
   RxString error = ''.obs;
 
-  void setRxRequestStatus(Status _value) => rxRequestStatus.value = _value;
+  void setRxRequestStatus(Status value) => rxRequestStatus.value = value;
 
-  void loginApi() {
+  Future<void> loginApi() async {
     setRxRequestStatus(Status.LOADING);
     Map data = {"identifier": emailController.value.text};
     // Map data = {"email": emailController.value.text, "password": passwordController.value.text};
-    _api.loginApi(data).then((response) {
+    await _api.loginApi(data).then((response) {
       setRxRequestStatus(Status.COMPLETED);
 
       if (response != null) {

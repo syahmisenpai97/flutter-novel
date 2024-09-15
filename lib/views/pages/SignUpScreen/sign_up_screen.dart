@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kacs/utils/utils.dart';
 import 'package:kacs/utils/validator/validator.dart';
 import 'package:kacs/views/pages/SignUpScreen/controller/sign_up_controller.dart';
 import 'package:kacs/views/widgets/form/button/button.dart';
@@ -99,7 +98,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           obscure: true,
                           keyboardType: TextInputType.visiblePassword,
                           validator: Validator.required,
-                          prefixIcon: Icons.password,
+                          suffixIcon: Icons.password,
+                          prefixIcon: Icons.lock,
                           value: null,
                           controller: signUpController.passwordController.value,
                           focusNode: signUpController.passwordFocusNode.value,
@@ -111,7 +111,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           obscure: true,
                           validator: (value) => Validator.passwordMatch(signUpController.passwordController.value.text, value),
                           keyboardType: TextInputType.visiblePassword,
-                          prefixIcon: Icons.password,
+                          suffixIcon: Icons.password,
+                          prefixIcon: Icons.lock,
                           value: null,
                           controller: signUpController.confirmPasswdController.value,
                           focusNode: signUpController.confirmPasswdFocusNode.value,

@@ -55,6 +55,7 @@ class _QTextFieldState extends State<QTextField> {
     focusNode = widget.focusNode ?? FocusNode();
     textEditingController = widget.controller ?? TextEditingController();
     textEditingController.text = widget.value ?? '';
+
     super.initState();
   }
 
@@ -76,27 +77,24 @@ class _QTextFieldState extends State<QTextField> {
 
   @override
   Widget build(BuildContext context) {
-    Widget? prefix = widget.prefixIcon != null && widget.obscure
-        ? InkWell(
-            onTap: () {
-              setState(() {
-                visible = !visible;
-              });
-            },
-            child: Padding(padding: textFieldLPadding, child: Icon(visible ? Icons.visibility : Icons.visibility_off)),
+    Widget? prefix = widget.prefixIcon != null
+        ? Padding(
+            padding: textFieldLPadding,
+            child: Icon(widget.prefixIcon),
           )
-        : widget.prefixIcon != null
-            ? Padding(padding: textFieldLPadding, child: Icon(widget.prefixIcon))
-            : null;
+        : null;
 
     Widget? suffix = widget.suffixIcon != null && widget.obscure
-        ? InkWell(
-            onTap: () {
-              setState(() {
-                visible = !visible;
-              });
-            },
-            child: Padding(padding: textFieldRPadding, child: Icon(visible ? Icons.visibility : Icons.visibility_off)),
+        ? Padding(
+            padding: textFieldRPadding,
+            child: InkWell(
+              onTap: () {
+                setState(() {
+                  visible = !visible;
+                });
+              },
+              child: Icon(visible ? Icons.visibility : Icons.visibility_off),
+            ),
           )
         : widget.suffixIcon != null
             ? Padding(padding: textFieldRPadding, child: Icon(widget.suffixIcon))

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kacs/models/view_model_user.dart';
 import 'package:kacs/utils/utils.dart';
@@ -32,6 +33,7 @@ class _OTPScreenState extends State<OTPScreen> {
                 ),
                 OTPPin(
                   otp: userDetails.otp,
+                  user: userDetails.user,
                 ),
                 const SizedBox(height: 44),
                 Text(
@@ -99,9 +101,10 @@ class OtpHeader extends StatelessWidget {
 }
 
 class OTPPin extends StatefulWidget {
-  const OTPPin({super.key, required this.otp});
+  const OTPPin({super.key, required this.otp, required this.user});
 
   final String otp;
+  final ViewModelUser user;
 
   @override
   State<OTPPin> createState() => _OTPPinState();
@@ -114,6 +117,8 @@ class _OTPPinState extends State<OTPPin> {
 
   late final GlobalKey<FormState> formKey;
 
+  final getBox = GetStorage();
+
   @override
   void initState() {
     super.initState();
@@ -121,7 +126,11 @@ class _OTPPinState extends State<OTPPin> {
     formKey = GlobalKey<FormState>();
     pinController = TextEditingController();
     focusNode = FocusNode();
-    print(widget.otp);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        Utils.showToast(widget.otp, sec: 5);
+      }
+    });
   }
 
   @override
@@ -158,6 +167,7 @@ class _OTPPinState extends State<OTPPin> {
         onCompleted: (pin) {
           debugPrint('onCompleted: $pin');
           if (pin == widget.otp) {
+            getBox.write('userData', widget.user.toJson());
             Get.offAllNamed('/home');
             Utils.showToast('Login successful');
           }

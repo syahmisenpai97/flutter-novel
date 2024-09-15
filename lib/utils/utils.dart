@@ -10,7 +10,7 @@ class Utils {
     FocusScope.of(context).requestFocus(nextFocus);
   }
 
-  static void showToast(String message, {bool isError = false}) {
+  static void showToast(String message, {bool isError = false, int sec = 3}) {
     FToast fToast = FToast();
     fToast.init(navigatorKey.currentContext!);
 
@@ -24,7 +24,7 @@ class Utils {
     fToast.showToast(
       child: toast,
       gravity: ToastGravity.BOTTOM,
-      toastDuration: Duration(seconds: 3),
+      toastDuration: Duration(seconds: sec),
     );
   }
 

@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kacs/constants/enum.dart';
-import 'package:kacs/controllers/auth/http/service_url.dart';
+import 'package:kacs/constants/http/service_url.dart';
+
 import 'package:kacs/models/view_model_novel.dart';
 import 'package:kacs/views/pages/HomeScreen/model/view_model_novel_list.dart';
 import 'package:kacs/services/api_services.dart';
-import 'package:kacs/utils/utils.dart';
 
 class NovelController extends GetxController {
   final _api = ApiService();
   List<ViewModelNovel>? _novelData;
   RxList<String> genres = <String>[].obs;
 
+  final searchController = TextEditingController().obs;
   final rxRequestStatus = Status.COMPLETED.obs;
+  final rxSearchLoading = Status.COMPLETED.obs;
   RxString error = ''.obs;
 
-  void setRxRequestStatus(Status _value) => rxRequestStatus.value = _value;
+  void setRxRequestStatus(Status value) => rxRequestStatus.value = value;
 
-  // New filteredData to store filtered results
   RxList<ViewModelNovelCollection> novelCollection = <ViewModelNovelCollection>[].obs;
   RxList<ViewModelNovelCollection> filteredData = <ViewModelNovelCollection>[].obs;
+  RxList<ViewModelNovelCollection> searchResults = <ViewModelNovelCollection>[].obs;
 
   @override
   Future<void> onInit() async {
@@ -77,6 +79,28 @@ class NovelController extends GetxController {
     } else {
       // Filter based on the selected genre
       filteredData.value = novelCollection.where((novel) => novel.genre == selectedGenre).toList();
+    }
+  }
+
+  void searchNovelsByTitle(String query) {
+    if (query.isEmpty || query.length < 2) {
+      // Clear the searchResults if the query is empty or less than 2 characters
+      searchResults.clear();
+    } else {
+      // Perform search based on the title
+      searchResults.value = novelCollection.where((novel) => novel.title.toLowerCase().contains(query.toLowerCase())).toList();
+    }
+  }
+
+  Map<String, IconData> getGreetingMessageAndIcon() {
+    final hour = DateTime.now().hour;
+
+    if (hour >= 5 && hour < 12) {
+      return {'Good Morning': Icons.light_mode};
+    } else if (hour >= 12 && hour < 19) {
+      return {'Good Afternoon': Icons.light_mode};
+    } else {
+      return {'Good Night': Icons.dark_mode};
     }
   }
 }

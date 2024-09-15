@@ -16,7 +16,7 @@ class OtpController extends GetxController {
   final rxRequestStatus = Status.COMPLETED.obs;
   RxString error = ''.obs;
 
-  void setRxRequestStatus(Status _value) => rxRequestStatus.value = _value;
+  void setRxRequestStatus(Status value) => rxRequestStatus.value = value;
 
   void loginApi(BuildContext context) {
     setRxRequestStatus(Status.LOADING);

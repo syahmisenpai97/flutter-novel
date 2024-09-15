@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kacs/views/pages/HomeScreen/controller/novel_controller.dart';
 import 'package:kacs/views/pages/HomeScreen/model/view_model_novel_list.dart';
 import 'package:kacs/views/pages/NovelDetailScreen/controller/novel_details_controller.dart';
-import 'package:kacs/views/pages/NovelDetailScreen/model/view_model_novel_details.dart';
 import 'package:kacs/views/themes/theme_config.dart';
 
 class NovelCollection extends StatelessWidget {
@@ -40,7 +38,7 @@ class NovelCollection extends StatelessWidget {
             }
           },
           child: Hero(
-            tag: context,
+            tag: info.imageUrl,
             child: Container(
               height: 160,
               width: 110,

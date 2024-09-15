@@ -28,4 +28,6 @@ class ModelStyle {
       fontFamily: 'Montserrat',
     );
   }
+
+ 
 }

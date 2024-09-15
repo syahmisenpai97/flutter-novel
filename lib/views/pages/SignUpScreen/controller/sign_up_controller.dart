@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kacs/constants/enum.dart';
 import 'package:kacs/services/api_services.dart';
-import 'package:kacs/utils/utils.dart';
 
 class SignUpController extends GetxController {
   final _api = ApiService();
@@ -28,7 +27,7 @@ class SignUpController extends GetxController {
   final rxRequestStatus = Status.COMPLETED.obs;
   RxString error = ''.obs;
 
-  void setRxRequestStatus(Status _value) => rxRequestStatus.value = _value;
+  void setRxRequestStatus(Status value) => rxRequestStatus.value = value;
 
   void registerApi() {
     setRxRequestStatus(Status.LOADING);

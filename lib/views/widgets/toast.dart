@@ -7,7 +7,7 @@ class QToast extends StatelessWidget {
   final bool isError;
   final FToast fToast = FToast();
 
-  QToast({required this.message, this.isError = false});
+  QToast({super.key, required this.message, this.isError = false});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +20,8 @@ class QToast extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          isError ? Icon(Icons.info_outline) : Icon(Icons.check),
-          SizedBox(width: 12.0),
+          isError ? const Icon(Icons.info_outline) : const Icon(Icons.check),
+          const SizedBox(width: 12.0),
           Text(message),
         ],
       ),

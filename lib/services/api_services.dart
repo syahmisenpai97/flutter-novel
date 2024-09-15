@@ -1,13 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:kacs/constants/enum.dart';
-import 'package:kacs/controllers/auth/http/service_url.dart';
+import 'package:kacs/constants/http/service_url.dart';
+
 import 'package:kacs/models/view_model_novel.dart';
 import 'package:kacs/models/view_model_country_code.dart';
 import 'package:kacs/models/view_model_user.dart';
 import 'package:kacs/services/base_api_services.dart';
 import 'package:kacs/utils/exception_handler.dart';
-import 'package:kacs/utils/extract_exception_api.dart';
-import 'package:kacs/utils/utils.dart';
 import 'package:kacs/views/pages/NovelDetailScreen/model/view_model_novel_details.dart';
 
 class ApiService {
@@ -25,6 +23,7 @@ class ApiService {
       print(stacktrace);
       handleApiException(e);
     }
+    return null;
   }
 
   Future<UserLoginData?> registerApi(var data) async {
@@ -39,6 +38,7 @@ class ApiService {
       print(stacktrace);
       handleApiException(e);
     }
+    return null;
   }
 
   Future<NovelData?> fetchNovel() async {
@@ -53,6 +53,7 @@ class ApiService {
       print(stacktrace);
       handleApiException(e);
     }
+    return null;
   }
 
   Future<NovelDetailsData?> fetchNovelByID(int id) async {
@@ -67,6 +68,7 @@ class ApiService {
       print(stacktrace);
       handleApiException(e);
     }
+    return null;
   }
 
   Future<CountryCodeData?> getCountryCodes() async {
@@ -81,5 +83,6 @@ class ApiService {
       print(stacktrace);
       handleApiException(e);
     }
+    return null;
   }
 }
